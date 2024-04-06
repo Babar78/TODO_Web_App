@@ -32,7 +32,7 @@ export async function POST(req) {
                     throw new Error('JWT_SECRET is not defined in the environment');
                 }
 
-                const token = jwt.sign({ userId: user.id, username: user.username, isLoggedIn: true }, process.env.JWT_SECRET, {
+                const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
                     expiresIn: '10m',
                 });
 

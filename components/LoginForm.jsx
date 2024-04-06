@@ -53,7 +53,7 @@ const LoginForm = () => {
                 // Tocken Management
                 const { token } = resData;
                 document.cookie = `token=${token}; path=/`;
-                router.replace("/home");
+                router.replace("/");
             }
         } catch (err) {
             alert("An error occurred while logging in the user");

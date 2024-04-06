@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import { MantineProvider } from '@mantine/core';
+import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import '@mantine/core/styles.css';
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
           <main className="app">
             {children}
           </main>
+          <ToastContainer />
         </MantineProvider>
       </body>
     </html>

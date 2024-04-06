@@ -3,10 +3,8 @@ import { connectMongoDB } from "@/lib/mongodb";
 import User from "@/models/userModel";
 
 export async function POST(req) {
-
-    await connectMongoDB();
-
     try {
+        await connectMongoDB();
         const { username, email, password } = await req.json();
 
         // check if user already exists
