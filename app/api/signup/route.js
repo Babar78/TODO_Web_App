@@ -22,7 +22,7 @@ export async function POST(req) {
         else {
             await User.create({ username, email, password })
             return NextResponse.json(
-                { message: "User registered successfully", data: { username: username, isLoggedin: true } },
+                { message: "User registered successfully!", data: { username: username, isLoggedin: true } },
                 { status: 200 }
             )
         }

@@ -70,6 +70,16 @@ const Signup = () => {
                 if (res.ok) {
                     const resData = await res.json();
 
+                    // Show success message toast
+                    toast.success(resData.message, {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                    });
+
                     router.replace("/login");
                 }
             } catch (err) {

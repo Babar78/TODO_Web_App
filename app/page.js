@@ -36,6 +36,13 @@ export default function Home() {
 
 
   return (
-    <div>Home page</div>
+    <div>Home page
+
+      <button onClick={() => {
+        Cookies.remove('token');
+        router.replace('/login');
+      }
+      }>Logout</button>
+    </div>
   );
 }

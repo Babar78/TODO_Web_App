@@ -37,7 +37,7 @@ export async function POST(req) {
                 });
 
                 return NextResponse.json(
-                    { message: "User logged in successfully", token },
+                    { message: "Logged in successfully!", token },
                     { status: 200 }
                 )
             }

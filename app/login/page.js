@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { useForm } from '@mantine/form';
-import { TextInput, Button, Group, Box } from '@mantine/core';
+import { TextInput, Button, Group, Box, MantineProvider } from '@mantine/core';
 import Image from 'next/image';
 import { Checkbox } from '@mantine/core';
 import { PasswordInput } from '@mantine/core';
@@ -11,6 +11,12 @@ import LoadingBackdrop from '@/components/LoadingBackdrop';
 
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
+
+import { createTheme } from '@mantine/core';
+
+const theme = createTheme({
+    cursorType: 'pointer',
+});
 
 const Login = () => {
 
@@ -22,7 +28,7 @@ const Login = () => {
         initialValues: {
             email: Cookies.get('rememberedEmail') || '', // Pre-fill email field from cookie if available
             password: '',
-            keepLoggedIn: !!Cookies.get('rememberedEmail'), // Set initial value of checkbox based on cookie
+            keepLoggedIn: !!Cookies.get('rememberedEmail') || false,
         },
         validate: {
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
@@ -71,7 +77,20 @@ const Login = () => {
                     Cookies.remove('rememberedEmail');
                 }
 
-                router.replace("/");
+                // Show success message toast
+                toast.success(resData.message, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
+
+                // Redirect to home page
+                router.push("/");
+
+
             }
         } catch (err) {
             toast.error('An error occurred while loggin in the user!', {
@@ -90,6 +109,7 @@ const Login = () => {
     };
 
     return (
+
         <>
             <LoadingBackdrop loading={loading} />
             <div className='w-screen h-screen flex justify-center items-center'>
@@ -101,6 +121,7 @@ const Login = () => {
                             width={200}
                             height={200}
                             className='w-[80px] m-auto'
+                            priority
                         />
                         <h1 className='text-secondary font-bold text-[30px] text-center -mt-[5px]'>
                             Login
@@ -123,11 +144,13 @@ const Login = () => {
                                 <a href="#" className="text-gray-400 hover:text-black text-[12px] mt-[5px]">Forgot password?</a>
                             </span>
                         </div>
-                        <Checkbox
-                            {...form.getInputProps('keepLoggedIn')}
-                            label="Remember me"
-                            color="#A53860"
-                        />
+                        <MantineProvider theme={theme}>
+                            <Checkbox
+                                label="Remember me"
+                                color="#A53860"
+                                {...form.getInputProps('keepLoggedIn')}
+                            />
+                        </MantineProvider>
                         <Group justify="center" mt="xl">
                             <Button
                                 color='#A53860'
