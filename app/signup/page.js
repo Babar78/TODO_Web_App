@@ -9,6 +9,7 @@ import Link from 'next/link';
 import bcrypt from "bcryptjs";
 import { useRouter } from 'next/navigation';
 import LoadingBackdrop from '@/components/LoadingBackdrop';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
 
@@ -56,20 +57,30 @@ const Signup = () => {
                 // if user already exists show aleat based on response status
                 if (res.status === 400) {
                     const resData = await res.json();
-                    alert(resData.message);
+                    toast.error(resData.message, {
+                        position: "bottom-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                    });
                 }
 
                 if (res.ok) {
                     const resData = await res.json();
 
-                    // save data in local storage
-                    if (typeof window !== "undefined") {
-                        localStorage.setItem("username", resData.data.username);
-                        localStorage.setItem("isLoggedin", resData.data.isLoggedin);
-                    }
-                    router.replace("/");
+                    router.replace("/login");
                 }
             } catch (err) {
+                toast.error('An error occurred while creating the user!', {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
                 console.log(err);
             } finally {
                 setLoading(false); // Set loading state to false when the fetch operation is complete
