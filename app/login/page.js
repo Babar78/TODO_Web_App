@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import LoadingBackdrop from '@/components/LoadingBackdrop';
 
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 const Login = () => {
 
@@ -19,9 +20,9 @@ const Login = () => {
 
     const form = useForm({
         initialValues: {
+            email: Cookies.get('rememberedEmail') || '', // Pre-fill email field from cookie if available
             password: '',
-            email: '',
-            keepLoggedIn: false,
+            keepLoggedIn: !!Cookies.get('rememberedEmail'), // Set initial value of checkbox based on cookie
         },
         validate: {
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
@@ -62,6 +63,14 @@ const Login = () => {
                 // Tocken Management
                 const { token } = resData;
                 document.cookie = `token=${token}; path=/`;
+
+                // Store email in cookie if "Remember me" is checked
+                if (values.keepLoggedIn) {
+                    Cookies.set('rememberedEmail', values.email, { expires: 365 }); // Store email for 1 year
+                } else {
+                    Cookies.remove('rememberedEmail');
+                }
+
                 router.replace("/");
             }
         } catch (err) {
