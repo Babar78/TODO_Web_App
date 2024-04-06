@@ -108,7 +108,7 @@ const Signup = () => {
                             priority
                             className='w-[80px] m-auto'
                         />
-                        <h1 className='text-[#162A3A] font-bold text-[30px] text-center -mt-[5px]'>
+                        <h1 className='text-secondary font-bold text-[30px] text-center -mt-[5px]'>
                             Signup
                         </h1>
 
@@ -144,7 +144,7 @@ const Signup = () => {
                     <div className='w-full flex justify-center'>
                         <span className='text-gray-400 text-center w-full text-[14px]'>
                             Already have an account?{' '}
-                            <Link href="/" className="hover:text-[#A53860] text-black">Login</Link>
+                            <Link href="/login" className="text-black hover:text-primary">Login</Link>
                         </span>
                     </div>
                 </Box>

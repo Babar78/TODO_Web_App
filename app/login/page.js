@@ -93,7 +93,7 @@ const Login = () => {
                             height={200}
                             className='w-[80px] m-auto'
                         />
-                        <h1 className='text-[#162A3A] font-bold text-[30px] text-center -mt-[5px]'>
+                        <h1 className='text-secondary font-bold text-[30px] text-center -mt-[5px]'>
                             Login
                         </h1>
 
@@ -131,7 +131,7 @@ const Login = () => {
                     <div className='w-full flex justify-center'>
                         <span className='text-gray-400 text-center w-full text-[14px]'>
                             Don't have an account?{' '}
-                            <Link href="/signup" className="hover:text-[#A53860] text-black">Sign up</Link>
+                            <Link href="/signup" className="text-black hover:text-primary">Sign up</Link>
                         </span>
                     </div>
                 </Box>
