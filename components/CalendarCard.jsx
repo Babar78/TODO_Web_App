@@ -1,9 +1,10 @@
+'use client'
 import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { Calendar } from '@mantine/dates';
 import { Card } from '@mantine/core';
 
-const CustomCalendar = () => {
+const CalendarCard = () => {
     const [selected, setSelected] = useState([]);
 
     useEffect(() => {
@@ -33,4 +34,4 @@ const CustomCalendar = () => {
     );
 };
 
-export default CustomCalendar;
+export default CalendarCard;

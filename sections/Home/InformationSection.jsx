@@ -1,12 +1,14 @@
 import React from 'react'
-import CustomCalendar from '@/components/CustomCalendar';
+import CalendarCard from '@/components/CalendarCard';
 import UserProfile from '@/components/UserProfile';
+import PerformanceCard from '@/components/PerformanceCard';
 
 const InformationSection = () => {
     return (
-        <section className='space-y-20 flex flex-col items-center px-20'>
+        <section className='space-y-14 flex flex-col items-center px-20'>
             <UserProfile />
-            <CustomCalendar />
+            <CalendarCard />
+            <PerformanceCard />
         </section>
     )
 }
