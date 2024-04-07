@@ -10,16 +10,17 @@ export async function GET() {
         const token = authHeader.split(' ')[1]
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
         if (!decoded) {
             return NextResponse.json(
-                { message: 'Expired' },
+                { message: 'Unauthorized!' },
                 {
                     status: 400,
                 },
             )
         } else if (decoded.exp < Math.floor(Date.now() / 1000)) {
             return NextResponse.json(
-                { message: 'Expired' },
+                { message: 'Token Expired!' },
                 {
                     status: 400,
                 },
@@ -27,7 +28,7 @@ export async function GET() {
         } else {
             // If the token is valid, return some protected data.
             return NextResponse.json(
-                { data: 'Protected data' },
+                { message: 'Token Verification Successful!' },
                 {
                     status: 200,
                 },
@@ -36,7 +37,7 @@ export async function GET() {
     } catch (error) {
         console.error('Token verification failed', error)
         return NextResponse.json(
-            { message: 'Unauthorized' },
+            { message: 'Token Verification Failed!' },
             {
                 status: 400,
             },

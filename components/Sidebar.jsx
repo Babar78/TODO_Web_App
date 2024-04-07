@@ -3,16 +3,20 @@ import React from 'react'
 import Link from "next/link";
 import SpeedIcon from '@mui/icons-material/Speed';
 import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
+import { usePathname } from 'next/navigation'
 
 
 const Sidebar = () => {
 
+    const pathname = usePathname()
     const [active, setActive] = React.useState('/');
 
     React.useEffect(() => {
-        setActive(window.location.pathname);
+        setActive(
+            pathname
+        );
     }, [
-        window.location.pathname
+        pathname
     ]);
 
     return (

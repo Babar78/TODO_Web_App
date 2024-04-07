@@ -90,8 +90,6 @@ const Login = () => {
 
                 // Redirect to home page
                 router.push("/");
-
-
             }
         } catch (err) {
             toast.error('An error occurred while loggin in the user!', {
