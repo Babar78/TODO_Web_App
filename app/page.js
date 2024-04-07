@@ -36,13 +36,15 @@ export default function Home() {
 
 
   return (
-    <div>Home page
+    <section className='flex gap-5'>
+      <div className='w-fit p-4'>
+          
+      </div>
 
-      <button onClick={() => {
-        Cookies.remove('token');
-        router.replace('/login');
-      }
-      }>Logout</button>
-    </div>
+      <div className='flex-grow bg-red-100'>
+        safa
+      </div>
+
+    </section>
   );
 }
