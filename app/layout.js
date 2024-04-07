@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "./globals.css";
 import '@mantine/core/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
+import '@mantine/dates/styles.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
