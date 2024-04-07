@@ -31,3 +31,12 @@ body {
   filter: blur(100px) saturate(150%);
   opacity: 0.15;
 }
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="search"]:focus {
+  outline: 1px solid #a53860;
+}

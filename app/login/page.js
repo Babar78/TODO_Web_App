@@ -11,8 +11,9 @@ import LoadingBackdrop from '@/components/LoadingBackdrop';
 
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
-
 import { createTheme } from '@mantine/core';
+
+
 
 const theme = createTheme({
     cursorType: 'pointer',
@@ -160,6 +161,7 @@ const Login = () => {
                             </Button>
                         </Group>
                     </form>
+
                     <div className='w-full flex justify-center'>
                         <span className='text-gray-400 text-center w-full text-[14px]'>
                             Don't have an account?{' '}
