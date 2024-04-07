@@ -11,7 +11,7 @@ import LogoutModal from '@/components/LogoutModal';
 
 import { toast } from 'react-toastify';
 import jwt from 'jsonwebtoken'
-import SessionModal from '@/components/SessionModal';
+import SessionNotification from '@/components/SessionNotification';
 
 export default function Home() {
 
@@ -19,7 +19,7 @@ export default function Home() {
   const token = Cookies.get('token');
 
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const [showSessionExpiredModal, setShowSessionExpiredModal] = useState(false);
+  const [showSessionExpireNotification, setShowSessionExpireNotification] = useState(false);
 
 
   // Verify the token after every 5 minutes
@@ -35,7 +35,7 @@ export default function Home() {
 
       // If 1 minute is left before token expiration, show session expiration modal
       if (decoded.exp - Math.floor(Date.now() / 1000) <= 60) {
-        setShowSessionExpiredModal(true);
+        setShowSessionExpireNotification(true);
       }
 
       if (decoded.exp < Math.floor(Date.now() / 1000)) {
@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <>
       <LogoutModal showLogoutModal={showLogoutModal} setShowLogoutModal={setShowLogoutModal} />
-      <SessionModal showSessionExpiredModal={showSessionExpiredModal} setShowSessionExpiredModal={setShowSessionExpiredModal} />
+      <SessionNotification showSessionExpireNotification={showSessionExpireNotification} setShowSessionExpireNotification={setShowSessionExpireNotification} />
       <section className='flex gap-10'>
         <div className='w-fit p-10 shadow-sm border-r-[0.5px] border-gray-100 h-screen flex flex-col justify-between'>
           <div className="h-[55px] flex items-center">
@@ -90,6 +90,12 @@ export default function Home() {
         <div className='flex-grow p-10 grid grid-cols-5'>
           <div className="col-span-3">
             <SearchBar />
+
+
+            <div>
+
+            </div>
+
           </div>
           <div className="col-span-2"></div>
 
