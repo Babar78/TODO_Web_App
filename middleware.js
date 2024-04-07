@@ -21,20 +21,20 @@ export default function middleware(req, ev) {
     }
 
 
-    // Check if the token is valid
-    if (token) {
-        try {
-            console.log('Token:', token);
-            const verifyToken = jwt.decode(token.value);
+    // // Check if the token is valid
+    // if (token) {
+    //     try {
+    //         console.log('Token:', token);
+    //         const verifyToken = jwt.decode(token.value);
 
-            if ((!verifyToken || verifyToken.exp < Math.floor(Date.now() / 1000)) && authRequiredPages.includes(pathname)) {
-                return NextResponse.redirect('http://localhost:3000/login');
-            }
-        }
-        catch (error) {
-            return console.log('Token verification failed', error);
-        }
-    }
+    //         if ((!verifyToken || verifyToken.exp < Math.floor(Date.now() / 1000)) && authRequiredPages.includes(pathname)) {
+    //             return NextResponse.redirect('http://localhost:3000/login');
+    //         }
+    //     }
+    //     catch (error) {
+    //         return console.log('Token verification failed', error);
+    //     }
+    // }
 
     // IF user is logged in then he should not be able to access login page and signup page
     if (pathname === '/login' && token) {
