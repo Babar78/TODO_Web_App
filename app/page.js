@@ -12,6 +12,8 @@ import LogoutModal from '@/components/LogoutModal';
 import { toast } from 'react-toastify';
 import jwt from 'jsonwebtoken'
 import SessionNotification from '@/components/SessionNotification';
+import TasksSection from '@/sections/Home/TasksSection';
+import InformationSection from '@/sections/Home/InformationSection';
 
 export default function Home() {
 
@@ -89,15 +91,11 @@ export default function Home() {
 
         <div className='flex-grow p-10 grid grid-cols-5'>
           <div className="col-span-3">
-            <SearchBar />
-
-
-            <div>
-
-            </div>
-
+            <TasksSection />
           </div>
-          <div className="col-span-2"></div>
+          <div className="col-span-2">
+            <InformationSection />
+          </div>
 
         </div>
 
