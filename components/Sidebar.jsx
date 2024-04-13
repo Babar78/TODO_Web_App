@@ -22,11 +22,11 @@ const Sidebar = () => {
     return (
         <>
             <div className='space-y-5'>
-                <Link href='/' className={`gap-2 flex items-center px-4 py-2 rounded-md ${active == "/" ? 'text-secondary bg-gray-100 font-semibold' : "text-[#bebebe]"}`}>
+                <Link href='/' className={`gap-2 flex items-center px-4 py-2 rounded-md ${active == "/" ? 'text-secondary bg-gray-100 font-semibold' : "text-[#7A7A7A]"}`}>
                     <SpeedIcon />
                     Dashboard
                 </Link>
-                <Link href='#' className={`gap-2 flex items-center px-4 py-2 rounded-md ${active == "/insights" ? 'text-secondary bg-gray-100 font-semibold' : "text-[#bebebe]"}`}>
+                <Link href='#' className={`gap-2 flex items-center px-4 py-2 rounded-md ${active == "/insights" ? 'text-secondary bg-gray-100 font-semibold' : "text-[#7A7A7A]"}`}>
                     <TipsAndUpdatesIcon />
                     Insights
                 </Link>

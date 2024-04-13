@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import jwt from 'jsonwebtoken'
 
 
 export default function middleware(req, ev) {
@@ -19,22 +18,6 @@ export default function middleware(req, ev) {
         // Redirect to the login page if authentication is required and the user is not authenticated
         return NextResponse.redirect('http://localhost:3000/login');
     }
-
-
-    // // Check if the token is valid
-    // if (token) {
-    //     try {
-    //         console.log('Token:', token);
-    //         const verifyToken = jwt.decode(token.value);
-
-    //         if ((!verifyToken || verifyToken.exp < Math.floor(Date.now() / 1000)) && authRequiredPages.includes(pathname)) {
-    //             return NextResponse.redirect('http://localhost:3000/login');
-    //         }
-    //     }
-    //     catch (error) {
-    //         return console.log('Token verification failed', error);
-    //     }
-    // }
 
     // IF user is logged in then he should not be able to access login page and signup page
     if (pathname === '/login' && token) {
