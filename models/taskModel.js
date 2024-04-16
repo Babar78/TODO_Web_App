@@ -7,7 +7,7 @@ const taskSchema = new Schema({
     },
     description: {
         type: String,
-        required: true
+        default: ''
     },
     creationDate: {
         type: Date,

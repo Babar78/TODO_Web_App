@@ -13,7 +13,7 @@ const AddTaskModal = ({ addTaskModal, setAddTaskModal, setTrigger, trigger }) =>
     const form = useForm({
         initialValues: {
             title: '',
-            creationDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+            creationDate: new Date(),
             description: ''
         },
         validate: {

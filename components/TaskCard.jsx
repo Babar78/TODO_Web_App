@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Text, Group, Checkbox } from '@mantine/core';
-import { IconMessageCircle, IconCalendarMonth, IconTrash, IconEdit } from '@tabler/icons-react'
+import { IconCalendarMonth, IconTrash, IconEdit } from '@tabler/icons-react'
 
 const TaskCard = (props) => {
     return (
@@ -16,7 +16,11 @@ const TaskCard = (props) => {
                     />
                     <Group gap={"xs"} className='text-[#7A7A7A]' ml={'30px'}>
                         <IconCalendarMonth />
-                        <Text size="sm">{props.task.creationDate}</Text>
+                        <Text size="sm">{new Date(props.task.creationDate).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}</Text>
                     </Group>
                 </div>
                 <div className='flex gap-5 w-fit'>
