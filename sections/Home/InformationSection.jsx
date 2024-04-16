@@ -8,7 +8,7 @@ const InformationSection = () => {
         <section className='space-y-14 flex flex-col items-center px-20'>
             <UserProfile />
             <CalendarCard />
-            <PerformanceCard />
+            {/* <PerformanceCard /> */}
         </section>
     )
 }
