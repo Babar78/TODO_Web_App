@@ -27,7 +27,7 @@ const TasksSection = () => {
                     }}>Organize and Manage Your Tasks with <span className='text-primary'>TaskTrek</span></h1>
                     <CustomButton
                         title={'Add New Task'}
-                        bgColor={'primary'}
+                        bgColor={'bg-primary'}
                         textColor={'white'}
                         roundedClass={'rounded-full'}
                         scaleAnimation={true}

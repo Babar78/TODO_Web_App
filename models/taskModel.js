@@ -5,13 +5,13 @@ const taskSchema = new Schema({
         type: String,
         required: true
     },
-    taskMessage: {
+    description: {
         type: String,
         required: true
     },
-    createdAt: {
+    creationDate: {
         type: Date,
-        default: Date.now
+        required: true,
     },
     taskStatus: {
         type: String,

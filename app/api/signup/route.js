@@ -11,8 +11,6 @@ export async function POST(req) {
         const user = await User.findOne
             ({ email: email });
 
-        console.log("In signup route", user);
-
         if (user) {
             return NextResponse.json(
                 { message: "User already exists" },
