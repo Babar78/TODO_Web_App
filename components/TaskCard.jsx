@@ -1,8 +1,8 @@
 import React from 'react'
-import { Card, Image, Text, Badge, Button, Group, Checkbox } from '@mantine/core';
+import { Card, Text, Group, Checkbox } from '@mantine/core';
 import { IconMessageCircle, IconCalendarMonth, IconTrash, IconEdit } from '@tabler/icons-react'
 
-const TaskCard = () => {
+const TaskCard = (props) => {
     return (
         <Card shadow="sm" padding="lg" radius="md" withBorder>
             <Group justify="space-between">
@@ -10,20 +10,13 @@ const TaskCard = () => {
                     <Checkbox
                         defaultChecked
                         color="#A53860"
-                        label="Finish User Authentication"
+                        label={props.task.title}
                         size='md'
                         className='font-semibold'
                     />
-                    <Group ml={'30px'}>
-                        <Group gap={"xs"} className='text-[#7A7A7A]'>
-                            <IconCalendarMonth />
-                            <Text size="sm">12th August, 2021</Text>
-                        </Group>
-                        <Group gap={"xs"} className='text-[#7A7A7A]'>
-                            <IconMessageCircle />
-                            <Text size="sm">01</Text>
-                        </Group>
-
+                    <Group gap={"xs"} className='text-[#7A7A7A]' ml={'30px'}>
+                        <IconCalendarMonth />
+                        <Text size="sm">{props.task.creationDate}</Text>
                     </Group>
                 </div>
                 <div className='flex gap-5 w-fit'>

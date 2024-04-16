@@ -6,10 +6,9 @@ import CustomButton from './CustomButton';
 import { useForm } from '@mantine/form';
 import { toast } from 'react-toastify';
 
-const AddTaskModal = ({ addTaskModal, setAddTaskModal }) => {
+const AddTaskModal = ({ addTaskModal, setAddTaskModal, setTrigger, trigger }) => {
 
     const [loadingOverlay, setLoadingOverlay] = useState(false);
-
 
     const form = useForm({
         initialValues: {
@@ -42,6 +41,9 @@ const AddTaskModal = ({ addTaskModal, setAddTaskModal }) => {
             if (res.ok) {
                 setLoadingOverlay(false);
                 setAddTaskModal(false);
+                // Change the trigger value to update the tasks list on parent element
+                setTrigger(!trigger);
+                // This will update the tasks list with the new task
                 toast.success('Task Added Successfully!', {
                     position: "bottom-right",
                     autoClose: 5000,
