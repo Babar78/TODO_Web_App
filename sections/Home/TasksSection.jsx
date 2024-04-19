@@ -62,7 +62,7 @@ const TasksSection = () => {
                 <div className='mt-10 space-y-2 max-h-[600px] overflow-hidden'>
                     {
                         tasks.map((task, index) => (
-                            <TaskCard key={index} task={task} />
+                            <TaskCard key={index} task={task} trigger={trigger} setTrigger={setTrigger} />
                         ))
                     }
                 </div>
