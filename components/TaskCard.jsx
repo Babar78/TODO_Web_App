@@ -1,8 +1,9 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { MantineProvider, Card, Text, Group, Checkbox, } from '@mantine/core';
 import { IconCalendarMonth, IconTrash, IconEdit } from '@tabler/icons-react'
 import { createTheme } from '@mantine/core';
+import EditTaskModal from './EditTaskModal';
 import DeleteTaskModal from './DeleteTaskModal';
 import LoadingBackdrop from './LoadingBackdrop';
 
@@ -14,14 +15,19 @@ const theme = createTheme({
 const TaskCard = (props) => {
 
     const [deleteTaskModal, setDeleteTaskModal] = useState(false);
+    const [editTaskModal, setEditTaskModal] = useState(false);
     const [loadingOverlay, setLoadingOverlay] = useState(false);
 
     return (
         <>
+            <LoadingBackdrop loading={loadingOverlay} />
+
             <DeleteTaskModal deleteTaskModal={deleteTaskModal} setDeleteTaskModal={setDeleteTaskModal} loadingOverlay={loadingOverlay} setLoadingOverlay={setLoadingOverlay} taskID={
                 props.task._id
             } trigger={props.trigger} setTrigger={props.setTrigger} />
-            <LoadingBackdrop loading={loadingOverlay} />
+
+            <EditTaskModal editTaskModal={editTaskModal} setEditTaskModal={setEditTaskModal} loadingOverlay={loadingOverlay} setLoadingOverlay={setLoadingOverlay} task={props.task} trigger={props.trigger} setTrigger={props.setTrigger} />
+
             <Card shadow="sm" padding="lg" radius="md" withBorder>
                 <Group justify="space-between">
                     <div className='space-y-3'>
@@ -44,7 +50,11 @@ const TaskCard = (props) => {
                         </Group>
                     </div>
                     <div className='flex gap-5 w-fit'>
-                        <IconEdit className='hover:text-secondary cursor-pointer text-[#7a7a7a]' />
+                        <IconEdit className='hover:text-secondary cursor-pointer text-[#7a7a7a]'
+                            onClick={
+                                () => setEditTaskModal(true)
+                            }
+                        />
                         <IconTrash className='hover:text-secondary cursor-pointer text-[#7a7a7a]' onClick={
                             () => setDeleteTaskModal(true)
                         } />

@@ -58,7 +58,7 @@ const DeleteTaskModal = ({ taskID, deleteTaskModal, setDeleteTaskModal, loadingO
     return (
         <Modal opened={deleteTaskModal} onClose={
             loadingOverlay ? () => { } : () => setDeleteTaskModal(false)
-        } title="Delete Task" padding={'xl'} radius={'xl'} centered id='addTaskModal' pos='relative'>
+        } title="Delete Task" padding={'xl'} radius={'xl'} centered id='deleteTaskModal' pos='relative'>
             <p className='text-[#7A7A7A] mb-[32px] text-[16px]'>
                 Are you sure you want to delete this task?
             </p>

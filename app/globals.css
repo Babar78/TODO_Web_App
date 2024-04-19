@@ -42,7 +42,9 @@ input[type="search"]:focus {
 }
 
 @layer utilities {
-  #addTaskModal-title {
+  #addTaskModal-title,
+  #deleteTaskModal-title,
+  #editTaskModal-title {
     @apply text-2xl font-bold text-secondary;
   }
 }
