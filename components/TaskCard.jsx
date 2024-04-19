@@ -6,6 +6,7 @@ import { createTheme } from '@mantine/core';
 import EditTaskModal from './EditTaskModal';
 import DeleteTaskModal from './DeleteTaskModal';
 import LoadingBackdrop from './LoadingBackdrop';
+import { toast } from 'react-toastify';
 
 
 const theme = createTheme({
@@ -17,6 +18,63 @@ const TaskCard = (props) => {
     const [deleteTaskModal, setDeleteTaskModal] = useState(false);
     const [editTaskModal, setEditTaskModal] = useState(false);
     const [loadingOverlay, setLoadingOverlay] = useState(false);
+    const [taskStatus, setTaskStatus] = useState(props.task.taskStatus);
+
+    console.log(taskStatus);
+
+
+    const handleTaskStatusChange = async () => {
+        try {
+            const response = await fetch(`/api/completeTask/`, {
+                method: 'PUT',
+                body: JSON.stringify({ taskID: props.task._id, taskStatus: props.task.taskStatus === 'pending' ? 'completed' : 'pending' }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            if (response.ok) {
+                props.setTrigger(!props.trigger);
+                {
+                    props.task.taskStatus === 'pending' ? toast.success('Task Completed Successfully!', {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                    }) : toast.success('Task marked as Pending!', {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                    });
+                }
+            } else {
+                console.error('Error completing task:', res.status);
+                toast.error('An Error Occoured while updating Task Status!', {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
+
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('An Error Occoured while updating Task Status!', {
+                position: "bottom-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        }
+    }
 
     return (
         <>
@@ -33,11 +91,12 @@ const TaskCard = (props) => {
                     <div className='space-y-3'>
                         <MantineProvider theme={theme}>
                             <Checkbox
-                                defaultChecked
+                                checked={taskStatus === 'pending' ? false : true}
+                                onChange={() => { setTaskStatus(taskStatus === 'pending' ? 'completed' : 'pending'), handleTaskStatusChange() }}
                                 color="#A53860"
                                 label={props.task.title}
                                 size='md'
-                                className='font-semibold'
+                                className={`font-semibold ${taskStatus === 'completed' ? 'line-through' : ''}`}
                             />
                         </MantineProvider>
                         <Group gap={"xs"} className='text-[#7A7A7A]' ml={'30px'}>
