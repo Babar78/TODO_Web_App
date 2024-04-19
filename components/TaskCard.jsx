@@ -20,9 +20,6 @@ const TaskCard = (props) => {
     const [loadingOverlay, setLoadingOverlay] = useState(false);
     const [taskStatus, setTaskStatus] = useState(props.task.taskStatus);
 
-    console.log(taskStatus);
-
-
     const handleTaskStatusChange = async () => {
         try {
             const response = await fetch(`/api/completeTask/`, {
@@ -86,9 +83,9 @@ const TaskCard = (props) => {
 
             <EditTaskModal editTaskModal={editTaskModal} setEditTaskModal={setEditTaskModal} loadingOverlay={loadingOverlay} setLoadingOverlay={setLoadingOverlay} task={props.task} trigger={props.trigger} setTrigger={props.setTrigger} />
 
-            <Card shadow="sm" padding="lg" radius="md" withBorder>
+            <Card shadow="sm" padding="lg" radius="md" withBorder className='w-full'>
                 <Group justify="space-between">
-                    <div className='space-y-3'>
+                    <div className=''>
                         <MantineProvider theme={theme}>
                             <Checkbox
                                 checked={taskStatus === 'pending' ? false : true}
@@ -96,10 +93,10 @@ const TaskCard = (props) => {
                                 color="#A53860"
                                 label={props.task.title}
                                 size='md'
-                                className={`font-semibold ${taskStatus === 'completed' ? 'line-through' : ''}`}
+                                className={`font-semibold ${taskStatus === 'completed' ? 'line-through' : ''} text-secondary`}
                             />
                         </MantineProvider>
-                        <Group gap={"xs"} className='text-[#7A7A7A]' ml={'30px'}>
+                        <Group gap={"xs"} className='text-[#7A7A7A]' ml={'30px'} mt={`calc(0.75rem/* 12px */ * calc(1 - var(--tw-space-y-reverse)))`}>
                             <IconCalendarMonth />
                             <Text size="sm">{new Date(props.task.creationDate).toLocaleDateString('en-US', {
                                 year: 'numeric',

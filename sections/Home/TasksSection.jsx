@@ -1,18 +1,24 @@
 'use client'
 import SearchBar from '@/components/SearchBar'
 import NotificationIcon from '@/components/NotificationIcon';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import CustomButton from '@/components/CustomButton';
 import TaskCard from '@/components/TaskCard';
 import AddTaskModal from '@/components/AddTaskModal';
-
+import { Tabs, rem, Pagination } from '@mantine/core';
+import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
 
 const TasksSection = () => {
+
+    // Tabs Icons
+    const iconStyle = { width: rem(12), height: rem(12) };
 
     const [addTaskModal, setAddTaskModal] = useState(false);
     const [tasks, setTasks] = React.useState([]);
     const [trigger, setTrigger] = useState(false);
 
+    // Pagination
+    const [activePage, setPage] = React.useState(1);
 
     // Fetch all tasks
     React.useEffect(() => {
@@ -59,12 +65,38 @@ const TasksSection = () => {
                     />
                 </div>
 
-                <div className='mt-10 space-y-2 max-h-[600px] overflow-hidden'>
-                    {
-                        tasks.map((task, index) => (
-                            <TaskCard key={index} task={task} trigger={trigger} setTrigger={setTrigger} />
-                        ))
-                    }
+                <div className='mt-10'>
+                    <Tabs defaultValue="todo" className='pt-2' color='#a53860'>
+                        <Tabs.List>
+                            <Tabs.Tab value="todo" leftSection={<IconPhoto style={iconStyle} />}>
+                                To-Do
+                            </Tabs.Tab>
+                            <Tabs.Tab value="completed" leftSection={<IconMessageCircle style={iconStyle} />}>
+                                Completed Tasks
+                            </Tabs.Tab>
+
+                        </Tabs.List>
+
+                        <Tabs.Panel value="todo" className='h-[500px] overflow-hidden flex flex-col justify-between items-center'>
+                            <div className='space-y-2 w-full'>
+                                {
+                                    tasks
+                                        .slice((activePage - 1) * 4, activePage * 4) // Slice the tasks array based on the current page and 3 items per page
+                                        .map((task, index) => (
+                                            <TaskCard key={index} task={task} trigger={trigger} setTrigger={setTrigger} />
+                                        ))
+                                }
+                            </div>
+                            <Pagination total={Math.ceil(tasks.length / 4)} value={activePage} onChange={setPage} mt="sm" color='#A53860' />
+                        </Tabs.Panel>
+
+                        <Tabs.Panel value="completed">
+                            Messages tab content
+                        </Tabs.Panel>
+
+
+                    </Tabs>
+
                 </div>
             </section>
         </>

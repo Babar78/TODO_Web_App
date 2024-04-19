@@ -7,7 +7,6 @@ export async function PUT(req) {
 
     try {
         const { taskID, taskStatus } = await req.json();
-        console.log("App Status", taskStatus);
 
         connectMongoDB();
 
