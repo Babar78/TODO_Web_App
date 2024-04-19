@@ -18,10 +18,18 @@ const TaskCard = (props) => {
     const [deleteTaskModal, setDeleteTaskModal] = useState(false);
     const [editTaskModal, setEditTaskModal] = useState(false);
     const [loadingOverlay, setLoadingOverlay] = useState(false);
+
+
     const [taskStatus, setTaskStatus] = useState(props.task.taskStatus);
+
+    useState(() => {
+        setTaskStatus(props.task.taskStatus);
+    }
+        , [props.task.taskStatus]);
 
     const handleTaskStatusChange = async () => {
         try {
+
             const response = await fetch(`/api/completeTask/`, {
                 method: 'PUT',
                 body: JSON.stringify({ taskID: props.task._id, taskStatus: props.task.taskStatus === 'pending' ? 'completed' : 'pending' }),
@@ -88,12 +96,13 @@ const TaskCard = (props) => {
                     <div className=''>
                         <MantineProvider theme={theme}>
                             <Checkbox
-                                checked={taskStatus === 'pending' ? false : true}
-                                onChange={() => { setTaskStatus(taskStatus === 'pending' ? 'completed' : 'pending'), handleTaskStatusChange() }}
+                                checked={taskStatus === 'completed'}
+                                id={props.task._id}
+                                onChange={() => { setTaskStatus(true), handleTaskStatusChange() }}
                                 color="#A53860"
                                 label={props.task.title}
                                 size='md'
-                                className={`font-semibold ${taskStatus === 'completed' ? 'line-through' : ''} text-secondary`}
+                                className={`font-semibold ${props.task.taskStatus === 'completed' ? 'line-through' : ''} text-secondary`}
                             />
                         </MantineProvider>
                         <Group gap={"xs"} className='text-[#7A7A7A]' ml={'30px'} mt={`calc(0.75rem/* 12px */ * calc(1 - var(--tw-space-y-reverse)))`}>

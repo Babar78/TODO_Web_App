@@ -6,12 +6,12 @@ import CustomButton from '@/components/CustomButton';
 import TaskCard from '@/components/TaskCard';
 import AddTaskModal from '@/components/AddTaskModal';
 import { Tabs, rem, Pagination } from '@mantine/core';
-import { IconPhoto, IconMessageCircle, IconSettings } from '@tabler/icons-react';
+import { IconCheckbox, IconBrandDatabricks } from '@tabler/icons-react';
 
 const TasksSection = () => {
 
     // Tabs Icons
-    const iconStyle = { width: rem(12), height: rem(12) };
+    const iconStyle = { width: rem(16), height: rem(16) };
 
     const [addTaskModal, setAddTaskModal] = useState(false);
     const [tasks, setTasks] = React.useState([]);
@@ -42,6 +42,11 @@ const TasksSection = () => {
         trigger
     ]);
 
+
+    // Filter tasks based on taskStatus
+    const todoTasks = tasks.filter(task => task.taskStatus === "pending");
+    const completedTasks = tasks.filter(task => task.taskStatus === "completed");
+
     return (
         <>
             <AddTaskModal addTaskModal={addTaskModal} setAddTaskModal={setAddTaskModal} setTrigger={setTrigger} trigger={trigger} />
@@ -68,10 +73,10 @@ const TasksSection = () => {
                 <div className='mt-10'>
                     <Tabs defaultValue="todo" className='pt-2' color='#a53860'>
                         <Tabs.List>
-                            <Tabs.Tab value="todo" leftSection={<IconPhoto style={iconStyle} />}>
+                            <Tabs.Tab value="todo" leftSection={<IconBrandDatabricks style={iconStyle} />}>
                                 To-Do
                             </Tabs.Tab>
-                            <Tabs.Tab value="completed" leftSection={<IconMessageCircle style={iconStyle} />}>
+                            <Tabs.Tab value="completed" leftSection={<IconCheckbox style={iconStyle} />}>
                                 Completed Tasks
                             </Tabs.Tab>
 
@@ -80,18 +85,31 @@ const TasksSection = () => {
                         <Tabs.Panel value="todo" className='h-[500px] overflow-hidden flex flex-col justify-between items-center'>
                             <div className='space-y-2 w-full'>
                                 {
-                                    tasks
+                                    todoTasks
                                         .slice((activePage - 1) * 4, activePage * 4) // Slice the tasks array based on the current page and 3 items per page
                                         .map((task, index) => (
                                             <TaskCard key={index} task={task} trigger={trigger} setTrigger={setTrigger} />
                                         ))
                                 }
                             </div>
-                            <Pagination total={Math.ceil(tasks.length / 4)} value={activePage} onChange={setPage} mt="sm" color='#A53860' />
+                            {
+                                todoTasks.length > 4 && <Pagination total={Math.ceil(tasks.length / 4)} value={activePage} onChange={setPage} mt="sm" color='#A53860' />
+                            }
                         </Tabs.Panel>
 
-                        <Tabs.Panel value="completed">
-                            Messages tab content
+                        <Tabs.Panel value="completed" className='h-[500px] overflow-hidden flex flex-col justify-between items-center'>
+                            <div className='space-y-2 w-full'>
+                                {
+
+                                    completedTasks.slice((activePage - 1) * 4, activePage * 4) // Slice the tasks array based on the current page and 3 items per page
+                                        .map((task, index) => (
+                                            <TaskCard key={index} task={task} trigger={trigger} setTrigger={setTrigger} />
+                                        ))
+                                }
+                            </div>
+                            {
+                                completedTasks.length > 4 && <Pagination total={Math.ceil(tasks.length / 4)} value={activePage} onChange={setPage} mt="sm" color='#A53860' />
+                            }
                         </Tabs.Panel>
 
 
