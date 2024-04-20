@@ -88,7 +88,6 @@ const TaskCard = (props) => {
                                     setTaskStatus(taskStatus === "pending" ? "completed" : "pending");
                                     handleTaskStatusChange();
                                 }}
-
                                 color="#A53860"
                                 label={props.task.title}
                                 size='md'

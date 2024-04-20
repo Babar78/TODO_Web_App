@@ -44,8 +44,13 @@ const TasksSection = () => {
 
 
     // Filter tasks based on taskStatus
-    const todoTasks = tasks.filter(task => task.taskStatus === "pending");
-    const completedTasks = tasks.filter(task => task.taskStatus === "completed");
+    const todoTasks = tasks
+        .filter(task => task.taskStatus === "pending")
+        .sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
+
+    const completedTasks = tasks
+        .filter(task => task.taskStatus === "completed")
+        .sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
 
     return (
         <>
