@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MantineProvider, Card, Text, Group, Checkbox, } from '@mantine/core';
 import { IconCalendarMonth, IconTrash, IconEdit } from '@tabler/icons-react'
 import { createTheme } from '@mantine/core';
@@ -14,22 +14,17 @@ const theme = createTheme({
 });
 
 const TaskCard = (props) => {
-
     const [deleteTaskModal, setDeleteTaskModal] = useState(false);
     const [editTaskModal, setEditTaskModal] = useState(false);
     const [loadingOverlay, setLoadingOverlay] = useState(false);
-
-
     const [taskStatus, setTaskStatus] = useState(props.task.taskStatus);
 
-    useState(() => {
+    useEffect(() => {
         setTaskStatus(props.task.taskStatus);
-    }
-        , [props.task.taskStatus]);
+    }, [props.task.taskStatus]);
 
     const handleTaskStatusChange = async () => {
         try {
-
             const response = await fetch(`/api/completeTask/`, {
                 method: 'PUT',
                 body: JSON.stringify({ taskID: props.task._id, taskStatus: props.task.taskStatus === 'pending' ? 'completed' : 'pending' }),
@@ -39,26 +34,8 @@ const TaskCard = (props) => {
             });
             if (response.ok) {
                 props.setTrigger(!props.trigger);
-                {
-                    props.task.taskStatus === 'pending' ? toast.success('Task Completed Successfully!', {
-                        position: "bottom-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                    }) : toast.success('Task marked as Pending!', {
-                        position: "bottom-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                    });
-                }
-            } else {
-                console.error('Error completing task:', res.status);
-                toast.error('An Error Occoured while updating Task Status!', {
+                const message = props.task.taskStatus === 'pending' ? 'Task Completed Successfully!' : 'Task marked as Pending!';
+                toast.success(message, {
                     position: "bottom-right",
                     autoClose: 2000,
                     hideProgressBar: false,
@@ -66,11 +43,20 @@ const TaskCard = (props) => {
                     pauseOnHover: true,
                     draggable: true,
                 });
-
+            } else {
+                console.error('Error completing task:', response.status);
+                toast.error('An Error Occurred while updating Task Status!', {
+                    position: "bottom-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
             }
         } catch (error) {
             console.error(error);
-            toast.error('An Error Occoured while updating Task Status!', {
+            toast.error('An Error Occurred while updating Task Status!', {
                 position: "bottom-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -80,6 +66,7 @@ const TaskCard = (props) => {
             });
         }
     }
+
 
     return (
         <>
@@ -97,12 +84,15 @@ const TaskCard = (props) => {
                         <MantineProvider theme={theme}>
                             <Checkbox
                                 checked={taskStatus === 'completed'}
-                                id={props.task._id}
-                                onChange={() => { setTaskStatus(true), handleTaskStatusChange() }}
+                                onChange={() => {
+                                    setTaskStatus(taskStatus === "pending" ? "completed" : "pending");
+                                    handleTaskStatusChange();
+                                }}
+
                                 color="#A53860"
                                 label={props.task.title}
                                 size='md'
-                                className={`font-semibold ${props.task.taskStatus === 'completed' ? 'line-through' : ''} text-secondary`}
+                                className={`font-semibold ${taskStatus === 'completed' ? 'line-through' : ''} text-secondary`}
                             />
                         </MantineProvider>
                         <Group gap={"xs"} className='text-[#7A7A7A]' ml={'30px'} mt={`calc(0.75rem/* 12px */ * calc(1 - var(--tw-space-y-reverse)))`}>

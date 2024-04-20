@@ -87,8 +87,8 @@ const TasksSection = () => {
                                 {
                                     todoTasks
                                         .slice((activePage - 1) * 4, activePage * 4) // Slice the tasks array based on the current page and 3 items per page
-                                        .map((task, index) => (
-                                            <TaskCard key={index} task={task} trigger={trigger} setTrigger={setTrigger} />
+                                        .map((task) => (
+                                            <TaskCard key={task._id} task={task} trigger={trigger} setTrigger={setTrigger} />
                                         ))
                                 }
                             </div>
@@ -102,8 +102,8 @@ const TasksSection = () => {
                                 {
 
                                     completedTasks.slice((activePage - 1) * 4, activePage * 4) // Slice the tasks array based on the current page and 3 items per page
-                                        .map((task, index) => (
-                                            <TaskCard key={index} task={task} trigger={trigger} setTrigger={setTrigger} />
+                                        .map((task) => (
+                                            <TaskCard key={task._id} task={task} trigger={trigger} setTrigger={setTrigger} />
                                         ))
                                 }
                             </div>
