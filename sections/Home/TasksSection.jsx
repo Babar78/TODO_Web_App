@@ -87,31 +87,37 @@ const TasksSection = () => {
 
                         </Tabs.List>
 
-                        <Tabs.Panel value="todo" className='h-[500px] overflow-hidden flex flex-col justify-between items-center'>
-                            <div className='space-y-2 w-full'>
-                                {
-                                    todoTasks
-                                        .slice((activePage - 1) * 4, activePage * 4) // Slice the tasks array based on the current page and 3 items per page
-                                        .map((task) => (
-                                            <TaskCard key={task._id} task={task} trigger={trigger} setTrigger={setTrigger} />
-                                        ))
-                                }
-                            </div>
+                        <Tabs.Panel value="todo" className={`h-[500px] overflow-hidden flex flex-col ${todoTasks.length < 1 ? 'justify-center' : 'justify-between'} items-center`}>
+
+                            {todoTasks.length === 0 ? <span className='text-[16px] text-[#a7a7a7]'>No Pending Tasks!</span> : (
+                                <div className='space-y-2 w-full'>
+                                    {
+                                        todoTasks
+                                            .slice((activePage - 1) * 4, activePage * 4) // Slice the tasks array based on the current page and 3 items per page
+                                            .map((task) => (
+                                                <TaskCard key={task._id} task={task} trigger={trigger} setTrigger={setTrigger} />
+                                            ))
+                                    }
+                                </div>
+                            )}
+
                             {
                                 todoTasks.length > 4 && <Pagination total={Math.ceil(tasks.length / 4)} value={activePage} onChange={setPage} mt="sm" color='#A53860' />
                             }
                         </Tabs.Panel>
 
-                        <Tabs.Panel value="completed" className='h-[500px] overflow-hidden flex flex-col justify-between items-center'>
-                            <div className='space-y-2 w-full'>
-                                {
-
-                                    completedTasks.slice((activePage - 1) * 4, activePage * 4) // Slice the tasks array based on the current page and 3 items per page
-                                        .map((task) => (
-                                            <TaskCard key={task._id} task={task} trigger={trigger} setTrigger={setTrigger} />
-                                        ))
-                                }
-                            </div>
+                        <Tabs.Panel value="completed" className={`h-[500px] overflow-hidden flex flex-col ${completedTasks.length < 1 ? 'justify-center' : 'justify-between'} items-center`}>
+                            {completedTasks.length === 0 ? <span className='text-[16px] text-[#a7a7a7]'>No Completed Tasks!</span> : (
+                                <div className='space-y-2 w-full'>
+                                    {
+                                        completedTasks
+                                            .slice((activePage - 1) * 4, activePage * 4) // Slice the tasks array based on the current page and 3 items per page
+                                            .map((task) => (
+                                                <TaskCard key={task._id} task={task} trigger={trigger} setTrigger={setTrigger} />
+                                            ))
+                                    }
+                                </div>
+                            )}
                             {
                                 completedTasks.length > 4 && <Pagination total={Math.ceil(tasks.length / 4)} value={activePage} onChange={setPage} mt="sm" color='#A53860' />
                             }
