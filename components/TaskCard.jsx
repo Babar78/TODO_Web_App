@@ -7,6 +7,7 @@ import EditTaskModal from './EditTaskModal';
 import DeleteTaskModal from './DeleteTaskModal';
 import LoadingBackdrop from './LoadingBackdrop';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 
 
 const theme = createTheme({
@@ -14,6 +15,13 @@ const theme = createTheme({
 });
 
 const TaskCard = (props) => {
+
+    // Decode the token to get the userId
+    const token = Cookies.get('token');
+    const userId = token
+        ? JSON.parse(atob(token.split('.')[1])).userId // Decode the second part (payload) and access the 'userId' property
+        : null;
+
     const [deleteTaskModal, setDeleteTaskModal] = useState(false);
     const [editTaskModal, setEditTaskModal] = useState(false);
     const [loadingOverlay, setLoadingOverlay] = useState(false);
@@ -74,7 +82,7 @@ const TaskCard = (props) => {
 
             <DeleteTaskModal deleteTaskModal={deleteTaskModal} setDeleteTaskModal={setDeleteTaskModal} loadingOverlay={loadingOverlay} setLoadingOverlay={setLoadingOverlay} taskID={
                 props.task._id
-            } trigger={props.trigger} setTrigger={props.setTrigger} />
+            } trigger={props.trigger} setTrigger={props.setTrigger} userId={userId} />
 
             <EditTaskModal editTaskModal={editTaskModal} setEditTaskModal={setEditTaskModal} loadingOverlay={loadingOverlay} setLoadingOverlay={setLoadingOverlay} task={props.task} trigger={props.trigger} setTrigger={props.setTrigger} />
 

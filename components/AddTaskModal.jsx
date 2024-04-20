@@ -6,15 +6,24 @@ import CustomButton from './CustomButton';
 import { useForm } from '@mantine/form';
 import { toast } from 'react-toastify';
 
+import Cookies from 'js-cookie';
+
 const AddTaskModal = ({ addTaskModal, setAddTaskModal, setTrigger, trigger }) => {
 
     const [loadingOverlay, setLoadingOverlay] = useState(false);
+
+    // Decode the token to get the userId
+    const token = Cookies.get('token');
+    const userId = token
+        ? JSON.parse(atob(token.split('.')[1])).userId // Decode the second part (payload) and access the 'userId' property
+        : null;
 
     const form = useForm({
         initialValues: {
             title: '',
             creationDate: new Date(),
-            description: ''
+            description: '',
+            userId: userId,
         },
         validate: {
             title: (value) => value.length > 0 ? null : 'Task Title is required',

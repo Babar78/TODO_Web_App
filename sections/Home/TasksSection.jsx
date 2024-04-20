@@ -7,8 +7,16 @@ import TaskCard from '@/components/TaskCard';
 import AddTaskModal from '@/components/AddTaskModal';
 import { Tabs, rem, Pagination } from '@mantine/core';
 import { IconCheckbox, IconBrandDatabricks } from '@tabler/icons-react';
+import Cookies from 'js-cookie';
 
 const TasksSection = () => {
+
+    // Decode the token to get the userId
+    const token = Cookies.get('token');
+    const userId = token
+        ? JSON.parse(atob(token.split('.')[1])).userId // Decode the second part (payload) and access the 'userId' property
+        : null;
+
 
     // Tabs Icons
     const iconStyle = { width: rem(16), height: rem(16) };
@@ -24,9 +32,10 @@ const TasksSection = () => {
     React.useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const res = await fetch('/api/fetchAllTasks', {
+                const res = await fetch(`/api/fetchAllTasks?userId=${userId}`, {
                     method: 'GET',
-                });
+                },
+                );
                 if (res.ok) {
                     const data = await res.json();
                     setTasks(data);

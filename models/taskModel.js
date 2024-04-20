@@ -17,6 +17,10 @@ const taskSchema = new Schema({
         type: String,
         default: 'pending'
     },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    }
 })
 
 

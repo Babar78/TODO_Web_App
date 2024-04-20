@@ -3,13 +3,13 @@ import { Modal, Group } from '@mantine/core';
 import { toast } from 'react-toastify';
 import CustomButton from './CustomButton';
 
-const DeleteTaskModal = ({ taskID, deleteTaskModal, setDeleteTaskModal, loadingOverlay, setLoadingOverlay, trigger, setTrigger }) => {
+const DeleteTaskModal = ({ taskID, deleteTaskModal, setDeleteTaskModal, loadingOverlay, setLoadingOverlay, trigger, setTrigger, userId }) => {
     const handleDeleteTask = async () => {
         setLoadingOverlay(true);
         try {
             const res = await fetch('/api/deleteTask', {
                 method: 'DELETE',
-                body: JSON.stringify({ taskID: taskID }),
+                body: JSON.stringify({ taskID: taskID, userId: userId }),
                 headers: {
                     'Content-Type': 'application/json'
                 }
