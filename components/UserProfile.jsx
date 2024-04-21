@@ -4,10 +4,8 @@ import { Menu, rem } from '@mantine/core';
 import {
     IconSettings,
     IconKey,
-    IconPhoto,
     IconDownload,
     IconTrash,
-    IconArrowsLeftRight,
 } from '@tabler/icons-react';
 
 const UserProfile = () => {

@@ -6,6 +6,7 @@ import '@mantine/core/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import '@mantine/dates/styles.css';
 import '@mantine/charts/styles.css';
+import MobileNavbar from "@/components/MobileNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
         <div className='bg-colorGradient'></div>
         <MantineProvider>
           <main className="app">
+            <MobileNavbar />
             {children}
           </main>
           <ToastContainer />

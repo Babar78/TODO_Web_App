@@ -72,7 +72,7 @@ export default function Home() {
       <LogoutModal showLogoutModal={showLogoutModal} setShowLogoutModal={setShowLogoutModal} />
       <SessionNotification showSessionExpireNotification={showSessionExpireNotification} setShowSessionExpireNotification={setShowSessionExpireNotification} />
       <section className='flex gap-10'>
-        <div className='w-fit p-10 shadow-sm border-r-[0.5px] border-gray-100 h-screen flex flex-col justify-between'>
+        <div className='w-fit p-10 shadow-sm border-r-[0.5px] border-gray-100 h-screen flex-col justify-between lg:flex hidden'>
           <div className="h-[55px] flex items-center">
             <Image
               src={'/assets/logo/logo.png'}
@@ -89,11 +89,11 @@ export default function Home() {
           <LogoutButton setShowLogoutModal={setShowLogoutModal} />
         </div>
 
-        <div className='flex-grow p-10 grid grid-cols-5'>
-          <div className="col-span-3">
+        <div className='flex-grow lg:p-10 min-[450px]:px-10 px-5 min-[450px]:pb-10 pb-5 xl:flex'>
+          <div className="flex-grow">
             <TasksSection />
           </div>
-          <div className="col-span-2">
+          <div className="w-[500px] min-w-fit xl:block hidden">
             <InformationSection />
           </div>
 

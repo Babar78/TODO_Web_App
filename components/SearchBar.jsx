@@ -4,7 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBar = () => {
     return (
-        <div className="relative shadow-sm rounded-full max-w-[500px] w-full h-fit">
+        <div className="relative shadow-sm rounded-full max-w-[500px] flex-grow h-fit">
             <div className="absolute inset-y-0 start-0 flex items-center ps-5 pointer-events-none text-gray-500 dark:text-gray-400">
                 <SearchIcon />
             </div>

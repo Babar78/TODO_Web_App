@@ -8,6 +8,7 @@ import AddTaskModal from '@/components/AddTaskModal';
 import { Tabs, rem, Pagination } from '@mantine/core';
 import { IconCheckbox, IconBrandDatabricks } from '@tabler/icons-react';
 import Cookies from 'js-cookie';
+import UserProfile from '@/components/UserProfile';
 
 const TasksSection = () => {
 
@@ -66,14 +67,20 @@ const TasksSection = () => {
             <AddTaskModal addTaskModal={addTaskModal} setAddTaskModal={setAddTaskModal} setTrigger={setTrigger} trigger={trigger} />
 
             <section className='flex flex-col'>
-                <div className="flex justify-between items-center h-fit">
+                <div className="lg:flex hidden justify-between items-center h-fit gap-10">
                     <SearchBar />
                     <NotificationIcon />
+                    <div className='xl:hidden lg:block hidden'>
+                        <UserProfile />
+                    </div>
                 </div>
-                <div className="mt-10 text-secondary space-y-8">
+                <div className="lg:mt-10 mt-0 text-secondary space-y-8">
                     <h1 className="lg:text-4xl text-2xl font-extrabold md:w-[80%]" style={{
                         lineHeight: "150%"
                     }}>Organize and Manage Your Tasks with <span className='text-primary'>TaskTrek</span></h1>
+                    <div className='lg:hidden block'>
+                        <SearchBar />
+                    </div>
                     <CustomButton
                         title={'Add New Task'}
                         bgColor={'bg-primary'}
